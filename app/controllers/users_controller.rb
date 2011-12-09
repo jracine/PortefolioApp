@@ -12,4 +12,14 @@ class UsersController < ApplicationController
   	end
   end
 
+  def destroy
+  	@user = User.find(params[:id])
+  	
+  	if @user.destroy
+  	  reset_session
+  	  redirect_to root_url, :notice=> "The account has been destroyed !" 
+  	else
+  	  redirect_to root_url, :notice=> "No destruction"	
+  	end
+  end
 end
