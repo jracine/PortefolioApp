@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update]
+
   def new
   	@user = User.new
   end
@@ -10,6 +12,11 @@ class UsersController < ApplicationController
   	else
   		render "new"
   	end
+  end
+
+  def show
+  	@user = User.find(params[:id])
+  	@images = @user.images
   end
 
   def destroy

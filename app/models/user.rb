@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
 attr_accessible :email, :password, :password_confirmation
   
   attr_accessor :password
+
+  has_many :images
+
   before_save :encrypt_password
   
   validates_confirmation_of :password

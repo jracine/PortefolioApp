@@ -34,4 +34,5 @@ gem "bcrypt-ruby", :require => "bcrypt"
 group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
+  gem "rspec-rails", "~> 2.7.0"
 end

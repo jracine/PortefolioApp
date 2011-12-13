@@ -1,4 +1,6 @@
 LoginApp::Application.routes.draw do
+  #resources :images
+
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -7,5 +9,6 @@ LoginApp::Application.routes.draw do
   root :to => "users#new"
   resources :users
   resources :sessions
+  resources :images
 
 end
