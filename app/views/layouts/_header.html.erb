@@ -1,0 +1,10 @@
+<header>
+ <div id="user_nav">
+  <% if signed_in? %>
+    <%= link_to "Log out", log_out_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", sign_up_path %> or
+    <%= link_to "log in", log_in_path %>
+  <% end %>
+</div>
+</header>

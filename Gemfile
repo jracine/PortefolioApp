@@ -18,6 +18,8 @@ end
 
 gem 'jquery-rails'
 gem "bcrypt-ruby", :require => "bcrypt"
+gem "carrierwave"
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -35,4 +37,5 @@ group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
   gem "rspec-rails", "~> 2.7.0"
+  gem 'factory_girl_rails', '1.0'
 end

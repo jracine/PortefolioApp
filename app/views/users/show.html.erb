@@ -1,18 +1,18 @@
-<table class="profile">
-  <tr>
-    <td class="main">
+<div class="profile">
+
  
       <% unless @user.images.empty? %>
-        <table class="image" summary="User images">
-          <%= render @images %>
-        </table>
+        <div class="show_image" summary="User images">
+          <ul>
+            <%= render @images %>
+          </ul>
+        </div>
       <% end %>
-    </td>
-    <td class="sidebar round">
+    <div class="sidebar">
       <strong>Name</strong> <%= @user.email %><br />
       <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
       <strong>Images</strong> <%= @user.images.count %>
-    </td>
-  </tr>
-</table>
-<%= link_to "Add images", "/images/new" %>
+    </div>
+    <div class="clear"></div>
+    <%= link_to "Add images", "/images/new" %>
+</div>

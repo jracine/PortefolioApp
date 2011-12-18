@@ -1,8 +1,14 @@
-<tr>
-  <td class="images">
+
+  <li class="images">
+  	<span class="image"><%= image_tag image.path_url.to_s %>
     <span class="content"><%= image.title %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(image.created_at) %> ago.
     </span>
-  </td>
-</tr>
+    
+    <div class="actions">
+    <span><%= link_to 'Show', image %></span>
+    <span><%= link_to 'Edit', edit_image_path(image) %></span>
+     <span><%= link_to 'Destroy', image, confirm: 'Are you sure?', method: :delete %></span>
+     </div>
+  </li>

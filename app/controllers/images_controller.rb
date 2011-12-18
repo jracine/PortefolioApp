@@ -27,7 +27,6 @@ class ImagesController < ApplicationController
   # GET /images/new.json
   def new
     @image = Image.new
-    @image.user_id = session[:user_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @image }
@@ -43,9 +42,24 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(params[:image])
+    @image.user_id = current_user.id
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
+        format.html { redirect_to current_user, notice: 'Image was successfully created.' }
+        format.json { render json: @image, status: :created, location: @image }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @image.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def createNoId
+    @image = Image.new(params[:image])
+    @image.user_id = ""
+    respond_to do |format|
+      if @image.save
+        format.html { redirect_to root_path, notice: 'Image was successfully created.' }
         format.json { render json: @image, status: :created, location: @image }
       else
         format.html { render action: "new" }
@@ -77,7 +91,7 @@ class ImagesController < ApplicationController
     @image.destroy
 
     respond_to do |format|
-      format.html { redirect_to images_url }
+      format.html { redirect_to current_user }
       format.json { head :ok }
     end
   end
