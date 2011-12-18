@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  #before_filter :is_user_logged_in?, :only => [:createNoId]
 
   #before_filter :authenticate
   # GET /images
@@ -43,6 +44,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
     @image.user_id = current_user.id
+    logger.debug "The value variable x = '#{@image}'"
     respond_to do |format|
       if @image.save
         format.html { redirect_to current_user, notice: 'Image was successfully created.' }
@@ -56,17 +58,19 @@ class ImagesController < ApplicationController
 
   def createNoId
     @image = Image.new(params[:image])
-    @image.user_id = ""
-    respond_to do |format|
-      if @image.save
-        format.html { redirect_to root_path, notice: 'Image was successfully created.' }
-        format.json { render json: @image, status: :created, location: @image }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
-    end
+    logger.debug "The value variable x = '#{@image}'"
+    @image.path = PhotoUploader.new
+    @image.path.cache!(params[:image])    
+    #logger.debug uploader.to_yaml
+    #logger.debug uploader.cache_name
+     if @image.path.cached?
+     #render :partial => 'imageInit', :locals => { :image => @image } 
+      redirect_to root_url, :locals => { :image => @image }   
+   else
+    redirect_to root_url,  notice: 'Upload did not processed.'  
   end
+      
+end
 
   # PUT /images/1
   # PUT /images/1.json
