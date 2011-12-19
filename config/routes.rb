@@ -3,6 +3,7 @@ LoginApp::Application.routes.draw do
   get "pages/home"
 
   get "pages/admin"
+  
   post "images/createNoId"
   #get "portefolio" => "portefolio#show", :as => "portefolio"
   get "log_out" => "sessions#destroy", :as => "log_out"

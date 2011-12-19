@@ -2,6 +2,7 @@
  <div id="user_nav">
   <% if signed_in? %>
     <%= link_to "Log out", log_out_path, :method => :delete %>
+    <td><%= link_to 'Cancel Account', @user, confirm: 'Are you sure?', method: :delete %></td>
   <% else %>
     <%= link_to "Sign up", sign_up_path %> or
     <%= link_to "log in", log_in_path %>

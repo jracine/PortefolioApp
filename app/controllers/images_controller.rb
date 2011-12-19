@@ -56,6 +56,21 @@ class ImagesController < ApplicationController
     end
   end
 
+  def createNoRedirect
+    @image = Image.new(params[:image])
+    @image.user_id = current_user.id
+    logger.debug "The value variable x = '#{@image}'"
+    respond_to do |format|
+      if @image.save
+        format.html { redirect_to current_user, notice: 'Image was successfully created.' }
+        format.json { render json: @image, status: :created, location: @image }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @image.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def createNoId
     @image = Image.new(params[:image])
     logger.debug "The value variable x = '#{@image}'"

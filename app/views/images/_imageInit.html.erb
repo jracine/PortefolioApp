@@ -1,0 +1,17 @@
+
+  <li class="images">
+
+<% if !Dir.glob(File.join("public", "uploads/tmp/*")).empty? %>
+	<% file = Dir.glob(File.join("public", "uploads/tmp/*")) do |file| %>
+			<% pic = Dir.glob(File.join(file, "/*")) do |pic| %>
+  					<%= image_tag File.join("/",pic.to_s) %>
+  				<%end%>
+  		<%end%>
+ <%else%>
+  	<span class="images">No Images</span>
+<%end%>
+     
+    <div class="actions">
+    
+     </div>
+  </li>

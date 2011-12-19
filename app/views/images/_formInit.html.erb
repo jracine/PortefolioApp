@@ -1,0 +1,9 @@
+<h2>Upload images now!</h2>
+<%= form_for @image, :html => {:multipart => true}, :url => { :controller => "images", :action => "createNoId" } do |f| %>
+<div class="field">
+    <%= f.file_field :path%><br />
+  </div>
+   <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
